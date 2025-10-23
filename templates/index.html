@@ -1,0 +1,45 @@
+{% extends "base.html" %}
+
+{% block title %}Home - Local Job Finder{% endblock %}
+
+{% block body %}
+<div class="container">
+    <header>
+        <h1>🔍 Local Job Finder</h1>
+        <form action="{{ url_for('login') }}" method="post" id="login-form">
+            <input type="email" name="email" placeholder="Email" required>
+            <input type="password" name="password" placeholder="Password" required>
+            <input type="submit" value="Login">
+        </form>
+    </header>
+    
+    <main>
+        <section>
+            <h2>Find Your Dream Job Locally</h2>
+            <p>Connect with local employers and discover exciting job opportunities in your area. Whether you're looking for full-time, part-time, or freelance work, we've got you covered!</p>
+            <br>
+            <p><strong>✓</strong> Browse local job postings</p>
+            <p><strong>✓</strong> Post job opportunities</p>
+            <p><strong>✓</strong> Connect with local talent</p>
+        </section>
+        
+        <aside>
+            <form action="{{ url_for('register') }}" method="post">
+                <h3>Get Started</h3>
+                
+                <input type="text" name="fullname" placeholder="Full Name" required>
+                <input type="email" name="email" placeholder="Email" required>
+                <input type="password" name="password" placeholder="Password" required>
+                
+                <select name="user_type" required>
+                    <option value="">Select Account Type</option>
+                    <option value="jobseeker">Job Seeker</option>
+                    <option value="employer">Employer</option>
+                </select>
+                
+                <input type="submit" value="Register Now">
+            </form>
+        </aside>
+    </main>
+</div>
+{% endblock %}
