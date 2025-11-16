@@ -1,0 +1,74 @@
+{% extends "base.html" %}
+
+{% block title %}Employer Dashboard - Local Job Finder{% endblock %}
+
+{% block body %}
+<div class="container">
+    <header>
+        <h1>🔍 Local Job Finder - Employer</h1>
+        <div>
+            <a href="{{ url_for('profile') }}" style="color: #fff; margin-right: 20px; text-decoration: none;">⚙️ Profile</a>
+            <a href="{{ url_for('logout') }}" class="logout-link">Logout</a>
+        </div>
+    </header>
+    
+    <div class="dashboard-container">
+        <div class="welcome-section">
+            <h2>Welcome, {{ user.company_name or user.name }}! 🏢</h2>
+            <p>Manage your job postings and applicants</p>
+        </div>
+        
+        <div class="post-job-section">
+            <h3>Post a New Job</h3>
+            <form action="{{ url_for('post_job') }}" method="post" id="job-form">
+                <label for="job-title">Job Title</label>
+                <input type="text" id="job-title" name="title" placeholder="e.g., Web Developer" required>
+                
+                <label for="job-location">Location</label>
+                <input type="text" id="job-location" name="location" placeholder="e.g., Cebu City" required>
+                
+                <label for="job-salary">Salary Range</label>
+                <input type="text" id="job-salary" name="salary" placeholder="e.g., ₱25,000 - ₱35,000">
+                
+                <label for="job-description">Job Description</label>
+                <textarea id="job-description" name="description" placeholder="Describe the job requirements and responsibilities..." required></textarea>
+                
+                <input type="submit" value="Post Job (Requires Admin Approval)">
+            </form>
+        </div>
+        
+        <div class="jobs-section">
+            <h3>My Job Postings</h3>
+            
+            {% if jobs %}
+                {% for job in jobs %}
+                <div class="job-card status-{{ job.status }}">
+                    <div class="job-header">
+                        <h4>{{ job.title }}</h4>
+                        <span class="status-badge status-{{ job.status }}">{{ job.status|capitalize }}</span>
+                    </div>
+                    <p class="location">📍 {{ job.location }}</p>
+                    {% if job.salary %}
+                    <p class="salary">💰 {{ job.salary }}</p>
+                    {% endif %}
+                    <p class="description">{{ job.description }}</p>
+                    <p class="meta">Posted: {{ job.created_at.strftime('%Y-%m-%d %H:%M') }}</p>
+                    
+                    <div class="job-actions">
+                        {% if job.status == 'approved' %}
+                        <a href="{{ url_for('job_applicants', job_id=job.id) }}" class="btn-view">
+                            👥 View Applicants ({{ job.applications|length }})
+                        </a>
+                        {% endif %}
+                        <a href="{{ url_for('delete_job', job_id=job.id) }}" class="btn-delete" 
+                           onclick="return confirm('Delete this job?')">🗑️ Delete</a>
+                    </div>
+                </div>
+                {% endfor %}
+            {% else %}
+                <p class="empty-state">You haven't posted any jobs yet. Create your first job posting above!</p>
+            {% endif %}
+        </div>
+    </div>
+</div>
+{% endblock %}

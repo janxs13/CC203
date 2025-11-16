@@ -1,0 +1,114 @@
+{% extends "base.html" %}
+
+{% block title %}Job Seeker Dashboard - Local Job Finder{% endblock %}
+
+{% block body %}
+<div class="container">
+    <header>
+        <h1>🔍 Local Job Finder</h1>
+        <div>
+            <a href="{{ url_for('profile') }}" style="color: #fff; margin-right: 20px; text-decoration: none;">⚙️ Profile</a>
+            <a href="{{ url_for('logout') }}" class="logout-link">Logout</a>
+        </div>
+    </header>
+    
+    <div class="dashboard-container">
+        <div class="welcome-section">
+            <h2>Welcome, {{ user.name }}! 👋</h2>
+            <p>Find your dream job today!</p>
+        </div>
+        
+        <div class="applications-section">
+            <h3>📝 My Applications</h3>
+            {% if applications %}
+                <div class="applications-list">
+                    {% for app in applications %}
+                    <div class="application-card status-{{ app.status }}">
+                        <h4>{{ app.job.title }}</h4>
+                        <p class="company">🏢 {{ app.job.employer.company_name or app.job.employer.name }}</p>
+                        <p class="location">📍 {{ app.job.location }}</p>
+                        <p class="meta">Applied: {{ app.applied_at.strftime('%Y-%m-%d %H:%M') }}</p>
+                        <span class="status-badge status-{{ app.status }}">{{ app.status|capitalize }}</span>
+                    </div>
+                    {% endfor %}
+                </div>
+            {% else %}
+                <p class="empty-state">You haven't applied to any jobs yet.</p>
+            {% endif %}
+        </div>
+        
+        <div class="jobs-section">
+            <h3>💼 Available Jobs</h3>
+            
+            {% if jobs %}
+                {% for job in jobs %}
+                <div class="job-card">
+                    <h4>{{ job.title }}</h4>
+                    <p class="company">🏢 {{ job.employer.company_name or job.employer.name }}</p>
+                    <p class="location">📍 {{ job.location }}</p>
+                    {% if job.salary %}
+                    <p class="salary">💰 {{ job.salary }}</p>
+                    {% endif %}
+                    <p class="description">{{ job.description }}</p>
+                    <p class="meta">Posted: {{ job.created_at.strftime('%Y-%m-%d') }}</p>
+                    
+                    {% set has_applied = applications|selectattr('job_id', 'equalto', job.id)|list|length > 0 %}
+                    
+                    {% if has_applied %}
+                        <button class="btn-applied" disabled>✓ Already Applied</button>
+                    {% else %}
+                        <button class="btn-apply" data-job-id="{{ job.id }}" data-job-title="{{ job.title }}">Apply Now</button>
+                    {% endif %}
+                </div>
+                {% endfor %}
+            {% else %}
+                <p class="empty-state">No jobs available at the moment. Check back later!</p>
+            {% endif %}
+        </div>
+    </div>
+</div>
+
+<div id="applyModal" class="modal">
+    <div class="modal-content">
+        <span class="close" onclick="closeApplyModal()">&times;</span>
+        <h3>Apply for <span id="modalJobTitle"></span></h3>
+        <form id="applyForm" method="post">
+            <label for="cover-letter">Cover Letter (Optional)</label>
+            <textarea id="cover-letter" name="cover_letter" rows="6" 
+                      placeholder="Tell the employer why you're a great fit for this position..."></textarea>
+            <button type="submit" class="btn-submit">Submit Application</button>
+        </form>
+    </div>
+</div>
+
+<script>
+document.addEventListener('DOMContentLoaded', function() {
+    // Add click event to all apply buttons
+    const applyButtons = document.querySelectorAll('.btn-apply');
+    applyButtons.forEach(function(button) {
+        button.addEventListener('click', function() {
+            const jobId = this.getAttribute('data-job-id');
+            const jobTitle = this.getAttribute('data-job-title');
+            openApplyModal(jobId, jobTitle);
+        });
+    });
+});
+
+function openApplyModal(jobId, jobTitle) {
+    document.getElementById('applyModal').style.display = 'block';
+    document.getElementById('modalJobTitle').textContent = jobTitle;
+    document.getElementById('applyForm').action = '/apply_job/' + jobId;
+}
+
+function closeApplyModal() {
+    document.getElementById('applyModal').style.display = 'none';
+}
+
+window.onclick = function(event) {
+    const modal = document.getElementById('applyModal');
+    if (event.target == modal) {
+        modal.style.display = 'none';
+    }
+}
+</script>
+{% endblock %}

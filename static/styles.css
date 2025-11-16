@@ -191,6 +191,12 @@ main aside form input[type="submit"]:hover {
     gap: 15px;
 }
 
+#job-form label {
+    color: #333;
+    font-weight: 600;
+    margin-bottom: -10px;
+}
+
 #job-form input,
 #job-form textarea {
     padding: 12px 20px;
@@ -324,4 +330,481 @@ main aside form input[type="submit"]:hover {
 
 .flash.info {
     background: #3498db;
+}
+
+/* Admin Styles */
+.admin-section {
+    background: #ffffff;
+    padding: 30px;
+    border-radius: 10px;
+    box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+    margin-bottom: 30px;
+}
+
+.admin-section h3 {
+    color: #667eea;
+    margin-bottom: 20px;
+}
+
+.admin-jobs {
+    display: grid;
+    gap: 15px;
+}
+
+.job-card.pending {
+    border-left: 4px solid #f39c12;
+    background: #fffbf0;
+}
+
+.job-card.approved {
+    border-left: 4px solid #27ae60;
+    background: #f0fff4;
+}
+
+.admin-actions {
+    display: flex;
+    gap: 10px;
+    margin-top: 15px;
+}
+
+.btn-approve, .btn-reject, .btn-delete, .btn-view, .btn-apply, .btn-submit, .btn-accept {
+    padding: 8px 16px;
+    border-radius: 5px;
+    text-decoration: none;
+    font-weight: 600;
+    font-size: 14px;
+    transition: all 0.3s ease;
+    border: none;
+    cursor: pointer;
+    display: inline-block;
+}
+
+.btn-approve {
+    background: #27ae60;
+    color: white;
+}
+
+.btn-approve:hover {
+    background: #229954;
+}
+
+.btn-reject {
+    background: #e74c3c;
+    color: white;
+}
+
+.btn-reject:hover {
+    background: #c0392b;
+}
+
+.btn-delete {
+    background: #e74c3c;
+    color: white;
+}
+
+.btn-delete:hover {
+    background: #c0392b;
+}
+
+.btn-view {
+    background: #3498db;
+    color: white;
+}
+
+.btn-view:hover {
+    background: #2980b9;
+}
+
+.btn-apply {
+    background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+    color: white;
+}
+
+.btn-apply:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 4px 12px rgba(102, 126, 234, 0.4);
+}
+
+.btn-applied {
+    background: #95a5a6;
+    color: white;
+    padding: 8px 16px;
+    border-radius: 5px;
+    border: none;
+    cursor: not-allowed;
+}
+
+.btn-submit {
+    background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+    color: white;
+    width: 100%;
+}
+
+.btn-submit:hover {
+    transform: translateY(-2px);
+}
+
+.btn-accept {
+    background: #27ae60;
+    color: white;
+}
+
+.btn-accept:hover {
+    background: #229954;
+}
+
+/* Users Table */
+.users-table {
+    overflow-x: auto;
+}
+
+.users-table table {
+    width: 100%;
+    border-collapse: collapse;
+    background: white;
+}
+
+.users-table th, .users-table td {
+    padding: 12px;
+    text-align: left;
+    border-bottom: 1px solid #e0e0e0;
+}
+
+.users-table th {
+    background: #f8f9fa;
+    color: #667eea;
+    font-weight: 600;
+}
+
+.badge-employer {
+    background: #3498db;
+    color: white;
+    padding: 4px 12px;
+    border-radius: 20px;
+    font-size: 12px;
+}
+
+.badge-jobseeker {
+    background: #27ae60;
+    color: white;
+    padding: 4px 12px;
+    border-radius: 20px;
+    font-size: 12px;
+}
+
+.btn-delete-small {
+    color: #e74c3c;
+    text-decoration: none;
+    font-weight: 600;
+}
+
+.btn-delete-small:hover {
+    color: #c0392b;
+}
+
+/* Job Status Badges */
+.status-badge {
+    padding: 4px 12px;
+    border-radius: 20px;
+    font-size: 12px;
+    font-weight: 600;
+}
+
+.status-pending {
+    background: #f39c12;
+    color: white;
+}
+
+.status-approved {
+    background: #27ae60;
+    color: white;
+}
+
+.status-rejected {
+    background: #e74c3c;
+    color: white;
+}
+
+.status-accepted {
+    background: #27ae60;
+    color: white;
+}
+
+.job-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 10px;
+}
+
+.job-actions {
+    display: flex;
+    gap: 10px;
+    margin-top: 15px;
+}
+
+.meta {
+    color: #999;
+    font-size: 12px;
+    margin-top: 10px;
+}
+
+.empty-state {
+    text-align: center;
+    color: #999;
+    padding: 40px;
+    font-style: italic;
+}
+
+/* Applications Section */
+.applications-section {
+    background: #ffffff;
+    padding: 30px;
+    border-radius: 10px;
+    box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+    margin-bottom: 30px;
+}
+
+.applications-section h3 {
+    color: #667eea;
+    margin-bottom: 20px;
+}
+
+.applications-list {
+    display: grid;
+    gap: 15px;
+}
+
+.application-card {
+    background: #f8f9fa;
+    padding: 20px;
+    border-radius: 8px;
+    border-left: 4px solid #667eea;
+}
+
+.application-card h4 {
+    color: #333;
+    margin-bottom: 8px;
+}
+
+.application-card .company, .application-card .location {
+    font-size: 14px;
+    color: #666;
+    margin: 5px 0;
+}
+
+/* Applicants Page */
+.applicants-section {
+    background: #ffffff;
+    padding: 30px;
+    border-radius: 10px;
+    box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+}
+
+.applicants-section h3 {
+    color: #667eea;
+    margin-bottom: 20px;
+}
+
+.applicant-card {
+    background: #f8f9fa;
+    padding: 20px;
+    border-radius: 8px;
+    margin-bottom: 15px;
+    border-left: 4px solid #667eea;
+}
+
+.applicant-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-start;
+    margin-bottom: 10px;
+}
+
+.applicant-header h4 {
+    color: #333;
+    margin-bottom: 5px;
+}
+
+.email {
+    color: #666;
+    font-size: 14px;
+}
+
+.cover-letter {
+    background: white;
+    padding: 15px;
+    border-radius: 5px;
+    margin: 15px 0;
+}
+
+.cover-letter strong {
+    color: #667eea;
+    display: block;
+    margin-bottom: 8px;
+}
+
+.cover-letter p {
+    color: #555;
+    line-height: 1.6;
+}
+
+.applicant-actions {
+    display: flex;
+    gap: 10px;
+    margin-top: 15px;
+}
+
+/* Modal Styles */
+.modal {
+    display: none;
+    position: fixed;
+    z-index: 1000;
+    left: 0;
+    top: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0,0,0,0.5);
+}
+
+.modal-content {
+    background-color: #fff;
+    margin: 10% auto;
+    padding: 30px;
+    border-radius: 10px;
+    width: 90%;
+    max-width: 600px;
+    box-shadow: 0 5px 30px rgba(0,0,0,0.3);
+}
+
+.close {
+    color: #aaa;
+    float: right;
+    font-size: 28px;
+    font-weight: bold;
+    cursor: pointer;
+}
+
+.close:hover {
+    color: #000;
+}
+
+.modal-content h3 {
+    color: #667eea;
+    margin-bottom: 20px;
+}
+
+.modal-content form {
+    display: flex;
+    flex-direction: column;
+}
+
+.modal-content label {
+    color: #333;
+    font-weight: 600;
+    margin-bottom: 8px;
+}
+
+.modal-content textarea {
+    padding: 12px;
+    border: 2px solid #e0e0e0;
+    border-radius: 5px;
+    margin-bottom: 20px;
+    font-family: inherit;
+    resize: vertical;
+}
+
+.modal-content textarea:focus {
+    outline: none;
+    border-color: #667eea;
+}
+
+/* Profile Section */
+.profile-section {
+    background: #ffffff;
+    padding: 30px;
+    border-radius: 10px;
+    box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+    max-width: 600px;
+}
+
+.profile-form {
+    display: flex;
+    flex-direction: column;
+}
+
+.profile-form label {
+    color: #333;
+    font-weight: 600;
+    margin-top: 15px;
+    margin-bottom: 5px;
+}
+
+.profile-form input, .profile-form textarea {
+    padding: 12px;
+    border: 2px solid #e0e0e0;
+    border-radius: 5px;
+    font-family: inherit;
+}
+
+.profile-form input:focus, .profile-form textarea:focus {
+    outline: none;
+    border-color: #667eea;
+}
+
+.profile-form input:disabled {
+    background: #f5f5f5;
+    cursor: not-allowed;
+}
+
+.profile-form textarea {
+    resize: vertical;
+}
+
+.profile-form button {
+    margin-top: 20px;
+}
+
+/* Responsive Design */
+@media (max-width: 768px) {
+    header {
+        flex-direction: column;
+        padding: 20px;
+        gap: 15px;
+    }
+    
+    header form {
+        width: 100%;
+        flex-wrap: wrap;
+    }
+    
+    header form input[type="email"],
+    header form input[type="password"] {
+        width: 100%;
+    }
+    
+    main {
+        flex-direction: column;
+        padding: 20px;
+    }
+    
+    .dashboard-container {
+        padding: 20px;
+    }
+    
+    .post-job-section,
+    .jobs-section,
+    .admin-section {
+        padding: 20px;
+    }
+    
+    .users-table {
+        font-size: 12px;
+    }
+    
+    .modal-content {
+        width: 95%;
+        margin: 20% auto;
+        padding: 20px;
+    }
 }

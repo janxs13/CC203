@@ -1,0 +1,46 @@
+{% extends "base.html" %}
+
+{% block title %}Profile - Local Job Finder{% endblock %}
+
+{% block body %}
+<div class="container">
+    <header>
+        <h1>🔍 Local Job Finder</h1>
+        <div>
+            <a href="{{ url_for('dashboard') }}" class="logout-link">← Back to Dashboard</a>
+        </div>
+    </header>
+    
+    <div class="dashboard-container">
+        <div class="welcome-section">
+            <h2>⚙️ Profile Settings</h2>
+            <p>Update your profile information</p>
+        </div>
+        
+        <div class="profile-section">
+            <form action="{{ url_for('profile') }}" method="post" class="profile-form">
+                <label for="name">Full Name</label>
+                <input type="text" id="name" name="name" value="{{ user.name }}" required>
+                
+                <label for="email">Email (Cannot be changed)</label>
+                <input type="email" id="email" value="{{ user.email }}" disabled>
+                
+                <label for="user-type">Account Type</label>
+                <input type="text" id="user-type" value="{{ user.user_type|capitalize }}" disabled>
+                
+                {% if user.user_type == 'employer' %}
+                <label for="company-name">Company Name</label>
+                <input type="text" id="company-name" name="company_name" 
+                       value="{{ user.company_name or '' }}" placeholder="Your company name">
+                
+                <label for="company-details">Company Details</label>
+                <textarea id="company-details" name="company_details" rows="5" 
+                          placeholder="Tell job seekers about your company...">{{ user.company_details or '' }}</textarea>
+                {% endif %}
+                
+                <button type="submit" class="btn-submit">Update Profile</button>
+            </form>
+        </div>
+    </div>
+</div>
+{% endblock %}
