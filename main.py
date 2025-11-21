@@ -226,8 +226,10 @@ def delete_user(user_id):
 @app.route('/apply_job/<int:job_id>', methods=['POST'])
 def apply_job(job_id):
     if 'user_id' not in session or session['user_type'] != 'jobseeker':
+        flash("You must be logged in as a job seeker to apply.", "danger")
         return redirect(url_for('index'))
     
+    # Check if already applied
     existing = Application.query.filter_by(job_id=job_id, user_id=session['user_id']).first()
     if existing:
         flash("You have already applied to this job.", "warning")
@@ -253,14 +255,19 @@ def job_applicants(job_id):
     if 'user_id' not in session or session['user_type'] != 'employer':
         return redirect(url_for('index'))
     
+    user = User.query.get(session['user_id'])
+    if not user:
+        session.clear()
+        flash("Session expired. Please login again.", "warning")
+        return redirect(url_for('index'))
+    
     job = Job.query.get(job_id)
     if not job or job.user_id != session['user_id']:
         flash("Unauthorized access.", "danger")
         return redirect(url_for('dashboard'))
     
     applications = Application.query.filter_by(job_id=job_id).order_by(Application.applied_at.desc()).all()
-    return render_template('applicants.html', job=job, applications=applications)
-
+    return render_template('applicants.html', job=job, applications=applications, user=user)
 @app.route('/update_application/<int:app_id>/<status>')
 def update_application(app_id, status):
     if 'user_id' not in session or session['user_type'] != 'employer':

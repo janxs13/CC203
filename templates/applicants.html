@@ -97,4 +97,12 @@
         </div>
     </div>
 </div>
+
+{% if applications %}
+    {% for app in applications %}
+    <!-- application cards -->
+    {% endfor %}
+{% else %}
+    <p class="empty-state">No applications yet for this job posting.</p>
+{% endif %}
 {% endblock %}
